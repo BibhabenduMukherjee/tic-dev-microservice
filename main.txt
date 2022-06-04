@@ -1,0 +1,56 @@
+small ticketing app that has
+1. auth as a service
+2. tickets as a service
+3. orders 
+4. expiration 
+5. payments
+
+{event - driven arc} nodejs+ts+kubernets [micro services arc]
+
+different evenets ---> in this app 
+1. UserCreated 
+2. OrderCreated 
+3. TicketCreated
+4. ChargeCreated
+5. OrderExpired
+6. OrderCancelled
+7. TicketUpdated
+8. UserUpdated 
+
+
+[++] STEP 1 -------
+build auth as  a service along with the kubernetes and docker setup
+
+build the docker image 
+"docker build -t dockerid/auth ."
+Then we create deployment for managaing pods
+
+
+[+] Disclaimer 
+After building the deployment object in kubernetes if want to change the codeBase it is very tedious task to do  means stpes are 
+--> update codeBase
+--> re-build the image 
+---> pish it to docker hub   
+--> run "kubectl rollout restart deployment <depl name>
+
+SO WE USE A SPECIAL TOOLS CALLED skaffold
+we have skaffold configured in the app 
+
+[++++]
+Now for load balancer service we use ingrees/ngnix
+--> we apply a config for ingrees/ngnix
+--> make a config file (ingress-srv.yaml)
+
+ingrees/ngnix -- this will help to redirect trafic to the actual services that running to the cluster
+
+In ingrees/ngnix config file we have an attributes called rules -> this will tell the information about how trafic goes in which backends 
+
+
+_____________________________________________________________
+
+Now we create a cluster is Google Cloud 
+
+How to connect to a google kubernetes cluster
+
+see kubectl use a context --------------------------------
+1. add a context 
